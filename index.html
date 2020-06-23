@@ -96,8 +96,11 @@
                 </li>
               </ul>
             </div>
-            <div class="col s12 m6 l6 crimson">Map</div>
-            <div class="col s12 m3 l3 crimson">Graph</div>
+            
+            <div class="col s12 m6 l6">Map</div>
+            
+            <div class="col s12 m3 l3" id= "mylist"></div> <!-- id ="" gives the tag a name--> 
+            
         </div>
         
 
@@ -130,7 +133,89 @@
               </div>
             </footer>
         
-        
     </body>
+    
+     <!-- INTRO TO JavaScript
+        name = "Bob" // if anything is in quotes, it is a string, asssign values using =
+        alert("hi I'm " + name); //string concatenation
+        age= 15; // integer or whole number
+        pi = 3.14; // float fractional number
+        isOld = false; // boolean, George Boule, french math dude
+        
+        // >=, <=, ==
+        // order of operations: BEDMAS
+        x = (1/3) * 10234 + (45678 - 3421);
+        alert(x);
+        
+        //Chained if statement. there are always curly braces
+        // always indent, it will work if not but won't be very clean
+        if(x>0){
+            for(i = 0; i<3; i++ ){//start with a counter, then is condition JS doesn't require you to declare the variable 
+            alert("gt")    
+        }
+            
+        } else if (x < 0){ //if it is less than 0
+            alert("lt")
+        } else{
+            alert("it is 0") // any other options
+        }
+        
+        // code doesn't always execute in order it is wrtten, where there is a condition/brancing in code
+        
+        //C is grandma, from C there is C++, C sharp, Java, JavaScript, Python -->
+        
+    
+    <script>
+        
+        makelist();
+        
+        function makelist() {
+            
+            data = [{pname:"NYC",cname:"USA",conf:218000},{pname:"Moscow",cname:"Russia",conf:212000},{pname:"Sao Paulo",cname:"Brazil",conf:100000}];
+            
+            mylist = document.getElementById("mylist");
+            
+            myhtml = "<ul class='collection'>";
+            for (i=0; i<data.length;i++) {
+                myhtml = myhtml + "<li class='collection-item avatar'>";
+                myhtml = myhtml + "<i class='material-icons circle'>folder</i>"
+                myhtml = myhtml + "<b>" + data[i]['pname'] + "</b><br>";
+                myhtml = myhtml + data[i]['conf'] + "</li>";
+            }
+            myhtml = myhtml + "</ul>";
+            
+            mylist.innerHTML = myhtml;
+            
+        }
+        
+        /*
+        // this creates a funtion called makelist,  function is the keyword then add a name with () and curley brackets
+       function makelist(){
+           //this is an array of data
+           data = [{pname:"NYC",cname:"USA",conf:218000},{pname:"Moscow",cname:"Russia",conf:212000},{pname:"Sao Paulo",cname:"Brazil",conf:100000}]
+           
+           //get control of the tag called my list, this is really powerful code
+ 
+           mylist = document.getElementById("mylist");
+           
+           // this is the same code that is in the avatar list
+           myhtml = "<ul class= 'collection'>";
+           
+           // it willl look
+           for(i=0; i<data.length;i++){
+               myhtml = myhtml + "<li class= 'collection=-item avatar'> ";
+               myhtml = myhtml + "<i class= 'material-icons circle'>folder</i>" ;
+               myhtml=  myhtml + "<b>" +data [i]['pname'] + "</br>";
+               myhtml = myhtml + data[i]['conf'] + "</il>";
+           }
+           myhtml = myhtml + "</ul>";
+           
+           // puts the html into the tag
+           mylist.innerHTML = myhtml
+       }
+        */
+        
+        
+    </script>
 
 </html>
