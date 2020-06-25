@@ -167,7 +167,7 @@
                     fillOpacity: 0.5,
                     radius: data[1]['conf']
                     // this creates a popup and adds it to map
-                }).bindPopup( ).addTo(map);
+                }).bindPopup(data[i]['cname'] + ": " + data[i]['conf'],{maxWidth: "auto"} ).addTo(map);
 
                 }
         }
