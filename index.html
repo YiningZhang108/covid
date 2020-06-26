@@ -32,6 +32,7 @@
         <style>
             h1{
                 text-align: center;
+                font-weight: bold;
             }
             .nav-wrapper{
                 background-color: darkred;
@@ -44,6 +45,7 @@
                 padding-left: 10px;
                 
             }
+            
             
             
         
@@ -72,23 +74,37 @@
         
         <h1 style="padding-left: 20px;">COVID 19 Dashboard</h1>
         <div class ="row">
-            <p style="padding-left: 20px; padding-top: 30px;" class ="col l8">This software will provide timely information about the pandemic</p>
+            <h4 style="padding-left: 20px; padding-top: 30px;" class ="col l8">This software will provide timely information about the pandemic</h4>
             <img src="virus.jpg" class ="col l4" style= "width: 300px; padding: 20px; border-radius: 50%"> <!-- inline-->
         </div>
        
         <!--- Grid for List, Map and Graph -->
 
         <div class="row"> <!-- all on the same row--><!--div is sort of like a container-->
-            <div class="col s12 m3 l3 crimson"  style="height: 500px;">
+            <div class="col s12 m7 l7" id="map" style="height: 500px;"></div>
+            
+            <div class="col s12 m5 l5 crimson"  style="height: 500px;">
             <canvas id="chartjs-2"></canvas>
+                
+                <div class="card" style="height: 200px;">
+                
+                    <div class="card-content">
+                      <span class="card-title activator grey-text text-darken-4">COVID 19<i class="material-icons right">more_vert</i></span>
+                      <p><a href="https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_daily_reports">John Hopkins Data</a></p>
+                    </div>
+                    <div class="card-reveal">
+                      <span class="card-title grey-text text-darken-4">Coronvirus Data<i class="material-icons right">close</i></span>
+                      <p>All of the data on this page comes from John Hopkins University</p>
+                    </div>
+                  </div>
+            
             </div>
             
-            <div class="col s12 m6 l6" id="map" style="height: 500px;"></div>
             
-            <div class="col s12 m3 l3" id= "mylist"></div> <!-- id ="" gives the tag a name--> 
             
-        </div>
-        
+            <!--<div class="col s12 m3 l3" id= "mylist"></div> <!-- id ="" gives the tag a name--> -->
+            
+            
 
             <!-- Footer -->
         
@@ -97,7 +113,7 @@
                 <div class="row">
                   <div class="col l6 s12">
                     <h5 class="white-text">COVID 19 Dashboard</h5>
-                    <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                    <p class="grey-text text-lighten-4"></p>
                   </div>
                   <div class="col l4 offset-l2 s12">
                   <h5 class="white-text">Links</h5>
@@ -184,9 +200,14 @@
         }
        
         function makechart(){
-            
-                   lables =['NYC', 'Moscow', 'France', 'Iran', 'Turkey'];
-                    data1 = [210000, 207000, 150000, 120000, 75000];
+                   lables = []
+                   data1 = []
+                   for(i=0;i<5;i++){
+                       lables.push(data[i]['pname']+ ", " + data[i]['cname']);
+                       data1.push(data[i]['conf'])
+                   }
+                   //lables =['NYC', 'Moscow', 'France', 'Iran', 'Turkey'];
+                   // data1 = [210000, 207000, 150000, 120000, 75000];
         
                         new  Chart(document.getElementById("chartjs-2"),{"type":"horizontalBar","data":{"labels":lables,"datasets":[{"label":"Confirmed Covid 19 Cases","data": data1,"fill":false,"backgroundColor":["rgba(255, 99, 132, 0.2)","rgba(255, 159, 64, 0.2)","rgba(255, 205, 86, 0.2)","rgba(75, 192, 192, 0.2)","rgba(54, 162, 235, 0.2)","rgba(153, 102, 255, 0.2)","rgba(201, 203, 207, 0.2)"],"borderColor":["rgb(255, 99, 132)","rgb(255, 159, 64)","rgb(255, 205, 86)","rgb(75, 192, 192)","rgb(54, 162, 235)","rgb(153, 102, 255)","rgb(201, 203, 207)"],"borderWidth":1}]},"options":{"scales":{"xAxes":[{"ticks":{"beginAtZero":true}}]}}});
                         }
