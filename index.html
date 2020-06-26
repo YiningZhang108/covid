@@ -23,6 +23,12 @@
         <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
         integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
         
+        <!-- Java Script and CSS for Chart-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js" integrity="sha256-nZaxPHA2uAaquixjSDX19TmIlbRNCOrf5HO1oHl5p70=" crossorigin="anonymous"></script>
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css" integrity="sha256-IvM9nJf/b5l2RoebiFno92E5ONttVyaEEsdemDC6iQA=" crossorigin="anonymous" />
+        
+        
         <style>
             h1{
                 text-align: center;
@@ -32,11 +38,13 @@
                 padding-left: 20px;
             }
             .page-footer{
-                background-color: darkred;
+                background-color: darkred; 
             }
-            h1{
+            h3{
                 padding-left: 10px;
+                
             }
+            
             
         
         </style>
@@ -63,17 +71,19 @@
                 <!-- Website Content) -->
         
         <h1 style="padding-left: 20px;">COVID 19 Dashboard</h1>
-        <p style="padding-left: 20px;">This software will provide timely information about the pandemic</p>
-        <img src="virus.jpg" style= "width: 300px; padding: 20px; border-radius: 50%"> <!-- inline-->
-        
-        
+        <div class ="row">
+            <p style="padding-left: 20px; padding-top: 30px;" class ="col l8">This software will provide timely information about the pandemic</p>
+            <img src="virus.jpg" class ="col l4" style= "width: 300px; padding: 20px; border-radius: 50%"> <!-- inline-->
+        </div>
+       
         <!--- Grid for List, Map and Graph -->
 
         <div class="row"> <!-- all on the same row--><!--div is sort of like a container-->
-            <div class="col s12 m3 l3 crimson">Graph
+            <div class="col s12 m3 l3 crimson"  style="height: 500px;">
+            <canvas id="chartjs-2"></canvas>
             </div>
             
-            <div class="col s12 m6 l6" id="map" style="height: 500px;">Map</div>
+            <div class="col s12 m6 l6" id="map" style="height: 500px;"></div>
             
             <div class="col s12 m3 l3" id= "mylist"></div> <!-- id ="" gives the tag a name--> 
             
@@ -115,6 +125,7 @@
         
     
     <script>
+        makechart()
         makemap();
         // calling the function
         makelist();
@@ -131,7 +142,7 @@
             myhtml = "<ul class='collection'><h3>Top 5 Covid locations</h3>";
             for (i=0; i<5 ;i++) {
                 myhtml = myhtml + "<li class='collection-item avatar'>";
-                myhtml = myhtml + "<i class='material-icons circle'>adb</i>"
+                myhtml = myhtml + "<i class='material-icons circle' style='background-color: red;'>warning</i>"
                 
                 if (data[i]['pname'] == ""){
                     myhtml = myhtml + "<b>" + data[i]['cname']+ "</b><br>"
@@ -165,14 +176,21 @@
                     color: 'red',
                     fillColor: '#f03',
                     fillOpacity: 0.5,
-                    radius: data[1]['conf']
+                    radius: data[i]['conf'] *2
                     // this creates a popup and adds it to map
                 }).bindPopup(data[i]['cname'] + ": " + data[i]['conf'],{maxWidth: "auto"} ).addTo(map);
 
                 }
         }
        
+        function makechart(){
+            
+                   lables =['NYC', 'Moscow', 'France', 'Iran', 'Turkey'];
+                    data1 = [210000, 207000, 150000, 120000, 75000];
         
+                        new  Chart(document.getElementById("chartjs-2"),{"type":"horizontalBar","data":{"labels":lables,"datasets":[{"label":"Confirmed Covid 19 Cases","data": data1,"fill":false,"backgroundColor":["rgba(255, 99, 132, 0.2)","rgba(255, 159, 64, 0.2)","rgba(255, 205, 86, 0.2)","rgba(75, 192, 192, 0.2)","rgba(54, 162, 235, 0.2)","rgba(153, 102, 255, 0.2)","rgba(201, 203, 207, 0.2)"],"borderColor":["rgb(255, 99, 132)","rgb(255, 159, 64)","rgb(255, 205, 86)","rgb(75, 192, 192)","rgb(54, 162, 235)","rgb(153, 102, 255)","rgb(201, 203, 207)"],"borderWidth":1}]},"options":{"scales":{"xAxes":[{"ticks":{"beginAtZero":true}}]}}});
+                        }
+
         
     </script>
 
